@@ -1,0 +1,41 @@
+.input {
+   max-width: 300px;
+   height: 100%;
+}
+
+.container-input {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.delete-container {
+   margin-top: 15px;
+}
+
+.delete-btn {
+   display: block;
+   width: 150px;
+   padding: 10px 15px;
+   margin-bottom: 12px;
+   font-size: 14px;
+   color: #f5222d;
+   border: 2px #f5222d solid;
+   box-sizing: border-box;
+   border-radius: 4px;
+   cursor: pointer;
+   margin-left: 10px;
+   text-align: center;
+}
+
+.add-btn {
+   max-width: 150px;
+   background: white;
+   margin-left: 10px;
+   cursor: pointer;
+   color: #1890ff;
+   border: 2px #1890ff solid;
+}
+
+.tag-errors__input {
+   border: 1px solid #F5222D;
+}
