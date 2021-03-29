@@ -51,9 +51,6 @@ export default class Api {
 
   static async getResource(url, obj) {
     const res = await fetch(url, obj);
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url} received ${res.status}`);
-    }
     const result = await res.json();
     return result;
   }

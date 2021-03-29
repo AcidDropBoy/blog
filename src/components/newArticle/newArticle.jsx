@@ -10,78 +10,83 @@ import TagsForm from '../tagsForm/tagsForm';
 import './newArticle.scss';
 
 const NewArticle = ({ history }) => {
-  const dispatch = useDispatch();
-  const userState = useSelector((state) => state.user);
-  const [articleAdd, setArticleAdd] = useState(false);
-  const [tagsAdd, setTagsAdd] = useState(new Set([]));
-  const { register, handleSubmit, errors, getValues } = useForm();
+   const dispatch = useDispatch();
+   const userState = useSelector((state) => state.user);
+   const [formSent, setFormSent] = useState(false);
+   const [tagsAdd, setTagsAdd] = useState(new Set([]));
+   const { register, handleSubmit, errors } = useForm();
+   const [formError, setFormError] = useState(false);
 
-  const onSubmit = (article) => {
-    const userPush = {
-      article: {
-        title: article.title,
-        description: article.shortdescription,
-        body: article.text,
-        tagList: [...tagsAdd],
-      },
-    };
-    if (!articleAdd) {
-      setArticleAdd(true);
-      Api.createArticle('/articles', userPush, userState.token).then(() => {
-         dispatch(loadArticles());
-         history.push('/');
-      });
-   }
-  };
+   const onSubmit = (article) => {
+      const userPush = {
+         article: {
+            title: article.title,
+            description: article.shortdescription,
+            body: article.text,
+            tagList: [...tagsAdd],
+         },
+      };
+      if (!formSent) {
+         setFormSent(true);
+         Api.createArticle('/articles', userPush, userState.token).then(() => {
+            dispatch(loadArticles());
+            history.push('/');
+         })
+            .catch(() => {
+               setFormError(true);
+            });
+      }
+   };
 
-  return (
-    <div className="newArticle-container">
-      <form className='newArticle-form' onSubmit={handleSubmit(onSubmit)}>
-        <h1>Create article</h1>
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          placeholder="Title"
-          className={clsx(errors.title?.type === 'required' || getValues('title') === " " && 'newArticle-errors__input')}
-          name="title"
-          ref={register({ required: true })}
-        />
-        {errors.title?.type === 'required' && <p>*The field cannot be empty</p>}
-        {getValues('title') === " " && <p>*The field cannot contain only a space</p>}
-        <label htmlFor="shortdescription">Short description</label>
-        <input
-          id="shortdescription"
-          placeholder="Short description"
-          className={clsx(errors.shortdescription?.type === 'required' || getValues('shortdescription') === " " && 'newArticle-errors__input')}
-          name="shortdescription"
-          ref={register({ required: true })}
-        />
-        {errors.shortdescription?.type === 'required' && <p>*The field cannot be empty</p>}
-        {getValues('shortdescription') === " " && <p>*The field cannot contain only a space</p>}
-        <label htmlFor="text">Text</label>
-        <textarea
-          id="text"
-          type="text"
-          placeholder="Text"
-          className={clsx(errors.text?.type === 'required' || getValues('text') === " " && 'newArticle-errors__input')}
-          name="text"
-          ref={register({ required: true })}
-        />
-        {errors.text?.type === 'required' && <p>*The field cannot be empty</p>}
-        {getValues('text') === " " && <p>*The field cannot contain only a space</p>}
-        <TagsForm tags={tagsAdd} setTags={setTagsAdd} />
-        <input type="submit" value="Send" />
-      </form>
-    </div>
-  );
+   return (
+      <div className="newArticle-container">
+         <form className='newArticle-form' onSubmit={handleSubmit(onSubmit)}>
+            <h1>Create article</h1>
+            <label htmlFor="title">Title</label>
+            <input
+               id="title"
+               placeholder="Title"
+               className={clsx(errors.title?.type === 'required' && 'newArticle-errors__input')}
+               name="title"
+               ref={register({ required: true, pattern: /^[^\s]+(\s.*)?$/i })}
+            />
+            {errors.title?.type === 'required' && <p>*The field cannot be empty</p>}
+            {errors.title?.type === 'pattern' && <p>*The field cannot contain only a space</p>}
+            <label htmlFor="shortdescription">Short description</label>
+            <input
+               id="shortdescription"
+               placeholder="Short description"
+               className={clsx(errors.shortdescription?.type === 'required' && 'newArticle-errors__input')}
+               name="shortdescription"
+               ref={register({ required: true, pattern: /^[^\s]+(\s.*)?$/i })}
+            />
+            {errors.shortdescription?.type === 'required' && <p>*The field cannot be empty</p>}
+            {errors.shortdescription?.type === 'pattern' && <p>*The field cannot contain only a space</p>}
+            <label htmlFor="text">Text</label>
+            <textarea
+               id="text"
+               type="text"
+               placeholder="Text"
+               className={clsx(errors.text?.type === 'required' && 'newArticle-errors__input')}
+               name="text"
+               ref={register({ required: true, pattern: /^[^\s]+(\s.*)?$/i })}
+            />
+            {errors.text?.type === 'required' && <p>*The field cannot be empty</p>}
+            {errors.text?.type === 'pattern' && <p>*The field cannot contain only a space</p>}
+            <TagsForm tags={tagsAdd} setTags={setTagsAdd} />
+            {formError ? <p>*Error sending the form</p> : null}
+            <input type="submit" value="Send" />
+         </form>
+      </div>
+   );
 };
 
 NewArticle.defaultProps = {
    history: {},
- };
- 
- NewArticle.propTypes = {
+};
+
+NewArticle.propTypes = {
    history: PropTypes.objectOf,
- };
+};
 
 export default withRouter(NewArticle);
