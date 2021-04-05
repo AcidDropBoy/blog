@@ -10,7 +10,7 @@ const ArticleDescription = ({ description, userName, authorName, slug, modal, de
         <div className="article-text">{description}</div>
       </div>
       <div className="article-btn">
-        {loginUser && userName === authorName ? (
+        {loginUser && userName === authorName && (
           <div>
             <Button
               onClick={() => {
@@ -24,7 +24,7 @@ const ArticleDescription = ({ description, userName, authorName, slug, modal, de
               <Link to={`/articles/${slug}/edit`}>Edit</Link>
             </Button>
           </div>
-        ) : null}
+        )}
         <div className={clsx('article-modal-delete', !modal && 'article-modal-delete-close')}>
           <div>Are you shure?</div>
           <div className="article-btn-modal">

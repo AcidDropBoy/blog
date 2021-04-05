@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Pagination } from 'antd';
 import RingLoader from 'react-spinners/RingLoader';
-import { getArticles, setPagination } from '../../action/action';
+import { getArticles, setPagination } from '../../redux/action';
 import Api from '../../api/api';
-import 'antd/dist/antd.css';
-import './articles.scss';
 import avatar from '../../image/avatar.svg';
 import ArticlesContent from './articlesContent';
+import 'antd/dist/antd.css';
+import './articles.scss';
 
 const Articles = ({ title, favorited, favoritesCount, tags, author, text, date, slug, loginUser, token }) => {
   const [putLike, setLike] = useState(favorited);
@@ -107,7 +107,7 @@ const ArticlesContainer = () => {
   return (
     <div className="content">
       {!loadingArticles ? <RingLoader size={150} color="blue" /> : ArticlesItems}
-      {loadingArticles ? (
+      {loadingArticles && (
         <Pagination
           className="pagination__m_b"
           pageSize={5}
@@ -116,7 +116,7 @@ const ArticlesContainer = () => {
           total={25}
           showSizeChanger={false}
         />
-      ) : null}
+      )}
     </div>
   );
 };

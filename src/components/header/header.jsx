@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUser, Login } from '../../action/action';
+import { getUser, Login } from '../../redux/action';
+import avatar from '../../image/avatar.svg';
 import 'antd/dist/antd.css';
 import './header.scss';
-import avatar from '../../image/avatar.svg';
 
 const Header = () => {
   const dispatch = useDispatch();

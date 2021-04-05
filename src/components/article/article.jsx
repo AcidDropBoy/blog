@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import RingLoader from 'react-spinners/RingLoader';
 import ReactMarkdown from 'react-markdown';
-import { getArticle, loadArticles, loadArticle } from '../../action/action';
+import { getArticle, loadArticles, loadArticle } from '../../redux/action';
+import ArticleSection from './articleSection';
+import ArticleDescription from './articleDescription';
 import Api from '../../api/api';
 import 'antd/dist/antd.css';
 import './article.scss';
-import ArticleSection from './articleSection';
-import ArticleDescription from './articleDescription';
 
 const Article = ({ article, tags, userName, slug, modal, setModal, deleteArticle, token, loginUser }) => {
   const { title, favoritesCount, favorited, description, author, createdAt, body } = article;
