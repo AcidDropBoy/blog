@@ -61,7 +61,7 @@ const ArticlesContainer = () => {
   const userState = useSelector((state) => state.usersReducer.user);
   const loadingArticles = useSelector((state) => state.articlesReducer.loadingArticles);
   const articles = useSelector((state) => state.articlesReducer.articles);
-  const pageNumber = useSelector((state) => state.pageNumber);
+  const pageNumber = useSelector((state) => state.articlesReducer.pageNumber);
   const authorOfArticle = useSelector((state) => state.articlesReducer.authorOfArticle);
 
   const useSetPagination = (page) => {
