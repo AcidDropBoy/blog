@@ -57,12 +57,12 @@ const Articles = ({ title, favorited, favoritesCount, tags, author, text, date, 
 
 const ArticlesContainer = () => {
   const dispatch = useDispatch();
-  const loginUser = useSelector((state) => state.loginUser);
-  const userState = useSelector((state) => state.user);
-  const loadingArticles = useSelector((state) => state.loadingArticles);
-  const articles = useSelector((state) => state.articles);
+  const loginUser = useSelector((state) => state.usersReducer.loginUser);
+  const userState = useSelector((state) => state.usersReducer.user);
+  const loadingArticles = useSelector((state) => state.articlesReducer.loadingArticles);
+  const articles = useSelector((state) => state.articlesReducer.articles);
   const pageNumber = useSelector((state) => state.pageNumber);
-  const authorOfArticle = useSelector((state) => state.authorOfArticle);
+  const authorOfArticle = useSelector((state) => state.articlesReducer.authorOfArticle);
 
   const useSetPagination = (page) => {
     dispatch(setPagination(page));

@@ -12,10 +12,10 @@ import './articleForm.scss';
 const ArticleForm = ({ history, slug, newArticle = true }) => {
    const dispatch = useDispatch();
    const [formSent, setFormSent] = useState(false);
-   const articleLoad = useSelector((state) => state.articleLoad);
-   const article = useSelector((state) => state.article);
-   const userState = useSelector((state) => state.user);
-   const loginUser = useSelector((state) => state.loginUser);
+   const articleLoad = useSelector((state) => state.articlesReducer.articleLoad);
+   const article = useSelector((state) => state.articlesReducer.article);
+   const userState = useSelector((state) => state.usersReducer.user);
+   const loginUser = useSelector((state) => state.usersReducer.loginUser);
    const [tagsEdit, setTagsEdit] = useState('');
    const [tagsAdd, setTagsAdd] = useState(new Set([]));
    const { register, handleSubmit, errors, setValue } = useForm();

@@ -8,8 +8,8 @@ import './header.scss';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const loginUser = useSelector((state) => state.loginUser);
-  const user = useSelector((state) => state.user);
+  const loginUser = useSelector((state) => state.usersReducer.loginUser);
+  const user = useSelector((state) => state.usersReducer.user);
 
   const logOut = () => {
     sessionStorage.removeItem('user');

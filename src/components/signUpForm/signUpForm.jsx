@@ -12,7 +12,7 @@ const SignUpForm = ({ history }) => {
   const dispatch = useDispatch();
   const [formSent, setFormSent] = useState(false);
   const { register, handleSubmit, errors, getValues } = useForm();
-  const loginUser = useSelector((state) => state.loginUser);
+  const loginUser = useSelector((state) => state.usersReducer.loginUser);
   const [signUpError, setSignUpError] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);

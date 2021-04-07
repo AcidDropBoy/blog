@@ -63,10 +63,10 @@ const Article = ({ article, tags, userName, slug, modal, setModal, deleteArticle
 
 const ArticleContainer = ({ slug, history }) => {
   const dispatch = useDispatch();
-  const loginUser = useSelector((state) => state.loginUser);
-  const user = useSelector((state) => state.user);
-  const articleLoad = useSelector((state) => state.articleLoad);
-  const article = useSelector((state) => state.article);
+  const loginUser = useSelector((state) => state.usersReducer.loginUser);
+  const user = useSelector((state) => state.usersReducer.user);
+  const articleLoad = useSelector((state) => state.articlesReducer.articleLoad);
+  const article = useSelector((state) => state.articlesReducer.article);
   const [modal, setModal] = useState(false);
 
   useEffect(() => {

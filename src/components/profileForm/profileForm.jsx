@@ -12,8 +12,8 @@ import './profileForm.scss';
 const ProfileForm = ({ history }) => {
   const dispatch = useDispatch();
   const [formSent, setFormSent] = useState(false);
-  const userState = useSelector((state) => state.user);
-  const loginUser = useSelector((state) => state.loginUser);
+  const userState = useSelector((state) => state.usersReducer.user);
+  const loginUser = useSelector((state) => state.usersReducer.loginUser);
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors, setValue } = useForm();
 
